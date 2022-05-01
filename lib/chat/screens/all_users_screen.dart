@@ -1,26 +1,26 @@
-import 'package:chat_app/chat/controller/chat_home_controller.dart';
-import 'package:chat_app/chat/screens/all_users_screen.dart';
-import 'package:chat_app/utils/custom_dimensions.dart';
-import 'package:chat_app/utils/custom_text_styles.dart';
-import 'package:chat_app/utils/enums.dart';
+import 'package:chat_app/chat/controller/all_users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/custom_dimensions.dart';
+import '../../utils/custom_text_styles.dart';
+import '../../utils/enums.dart';
 import '../widgets/user_list_item.dart';
 
-class ChatHomeScreen extends StatefulWidget {
-  const ChatHomeScreen({Key? key}) : super(key: key);
+class AllUsersScreen extends StatefulWidget {
+  const AllUsersScreen({Key? key}) : super(key: key);
 
   @override
-  _ChatHomeScreenState createState() => _ChatHomeScreenState();
+  _AllUsersScreenState createState() => _AllUsersScreenState();
 }
 
-class _ChatHomeScreenState extends State<ChatHomeScreen> {
-  final ChatHomeController _controller = Get.put(ChatHomeController());
+class _AllUsersScreenState extends State<AllUsersScreen> {
+  final AllUsersController _controller = Get.put(AllUsersController());
+
   @override
   void initState() {
     // TODO: implement initState
-    _controller.getChatUsersList();
+    _controller.getAllUsersList();
     super.initState();
   }
 
@@ -28,10 +28,9 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat App'),
+        title: const Text('Start New Chat'),
         centerTitle: true,
       ),
-      floatingActionButton: _getFloatingActionBtn(),
       body: _getBody(),
     );
   }
@@ -58,21 +57,13 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
         }
 
         return ListView.builder(
-          padding: const EdgeInsets.all(spacing_xxl_4),
+          padding: const EdgeInsets.symmetric(
+              vertical: spacing_xl, horizontal: spacing_xxl_2),
           itemCount: _controller.allUsers.length,
-          itemBuilder: (ctx, i) => UserListItem(
-            modelUser: _controller.allUsers[i],
-          ),
+          itemBuilder: (ctx, i) =>
+              UserListItem(modelUser: _controller.allUsers[i]),
         );
       },
     );
-  }
-
-  _getFloatingActionBtn() {
-    return FloatingActionButton(
-        onPressed: () {
-          Get.to(const AllUsersScreen());
-        },
-        child: const Icon(Icons.add));
   }
 }

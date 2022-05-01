@@ -31,9 +31,9 @@ class ModelUser {
   );
 
   Map<String, dynamic> toMap() => {
-    "user_id": userId ?? "",
-    "name": name ?? "",
-    "email": email ?? "",
+    "user_id": userId,
+    "name": name,
+    "email": email,
     "mobileNo": mobileNo ?? "",
     "profile_url": profileUrl ?? '',
     // "Password": password ?? '',

@@ -19,7 +19,7 @@ class FireBaseAuthMethods {
     }
   }
 
-  static Future<bool> logout(BuildContext context) async {
+  static Future<bool> logout() async {
     try {
       await _auth.signOut();
       return true;
